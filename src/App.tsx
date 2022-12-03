@@ -26,21 +26,19 @@ export type SettingsType = {
 function App() {
 
 
-
     //Стейт настроек счётчика в виде объекта (Мне показалось это логичным)
     const [settings, setSettings] = useState<SettingsType>({
         maxValue: 5,
         startValue: 0,
         incValue: 1,
     })
-    useEffect(()=> {
+    useEffect(() => {
         setSettings({
-            maxValue: Number(localStorage.getItem('maxValue')),
-            startValue: Number(localStorage.getItem('startValue')),
-            incValue: Number(localStorage.getItem('incValue')),
+            maxValue: localStorage.getItem('maxValue') ? Number(localStorage.getItem('maxValue')) : settings.maxValue,
+            startValue: localStorage.getItem('maxValue') ? Number(localStorage.getItem('startValue')) : settings.startValue,
+            incValue: localStorage.getItem('incValue') ? Number(localStorage.getItem('incValue')) : settings.incValue,
         })
     }, [])
-
 
 
     // Промежуточный стейт настроек(не смог решить по другому, т.к. Кнопка которая сетает значения инпутов
@@ -53,9 +51,9 @@ function App() {
     })
     useEffect(() => {
         setPreSettings({
-            maxValue: Number(localStorage.getItem('maxValue')),
-            startValue: Number(localStorage.getItem('startValue')),
-            incValue: Number(localStorage.getItem('incValue'))
+            maxValue: localStorage.getItem('maxValue') ? Number(localStorage.getItem('maxValue')) : settings.maxValue,
+            startValue: localStorage.getItem('maxValue') ? Number(localStorage.getItem('startValue')) : settings.startValue,
+            incValue: localStorage.getItem('incValue') ? Number(localStorage.getItem('incValue')) : settings.incValue,
         })
     }, [])
 
@@ -70,7 +68,7 @@ function App() {
     //Стейт значения счётчика
     const [counterValue, setCounterValue] = useState<number>(settings.startValue)
 
-    useEffect(()=> {
+    useEffect(() => {
         setCounterValue(settings.startValue)
     }, [settings])
 
@@ -111,7 +109,8 @@ function App() {
     // из дочерних инпутов, которые находятся в компоненте <CounterSettingsWindow/>
     const changeMaxValue = (maxValue: number) => {
         setPreSettings({...preSettings, maxValue})
-        if(maxValue <= preSettings.startValue || maxValue <= 0 ){}
+        if (maxValue <= preSettings.startValue || maxValue <= 0) {
+        }
         maxValue <= preSettings.startValue
             ? setError(true)
             : setError(false)
@@ -122,9 +121,11 @@ function App() {
 
     const changeStartValue = (startValue: number) => {
         setPreSettings({...preSettings, startValue})
-            if(startValue >= preSettings.maxValue || startValue < 0 ){
-                setError(true)
-            } else {setError(false)}
+        if (startValue >= preSettings.maxValue || startValue < 0) {
+            setError(true)
+        } else {
+            setError(false)
+        }
         // (startValue >= preSettings.maxValue)
         //     ? setError(true)
         //     : setError(false)
