@@ -1,13 +1,22 @@
 .counterWrapper {
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 15em;
+    width: 20em;
 
 }
 
 .counterDisplay {
-
+    height: 55%;
+    width: 90%;
+    padding: .5em;
 }
 
 .buttonWrapper {
+    height: 25%;
+    width: 90%;
 
 }
 
@@ -19,5 +28,5 @@
 .flexCenter {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 }

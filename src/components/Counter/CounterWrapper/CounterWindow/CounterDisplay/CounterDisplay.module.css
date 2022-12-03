@@ -1,9 +1,18 @@
 .counterValue {
     font-size: 4em;
-    font-weight: bold;
     color: #73caec;
 }
 
 .maxValue {
+    color: #9d3030;
+}
+
+.placeholder {
+    font-size: 1.2em;
+    color: #73caec;
+}
+
+.error {
+    font-size: 1.2em;
     color: #9d3030;
 }

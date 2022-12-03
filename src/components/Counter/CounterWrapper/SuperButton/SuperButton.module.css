@@ -1,0 +1,19 @@
+.supperButton {
+    padding: .06em .5em;
+    font-size: 2em;
+    font-weight: bold;
+    color: #292b34;
+    background-color: #73caec;
+    border: none;
+    border-radius: 10px;
+
+}
+.supperButton:active {
+    background-color: #305767;
+}
+
+.supperButton:disabled {
+    background-color: #9cadb4;
+}
+
+
