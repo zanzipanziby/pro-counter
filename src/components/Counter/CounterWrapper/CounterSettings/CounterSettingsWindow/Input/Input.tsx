@@ -8,9 +8,9 @@ type InputPropsType = {
 }
 
 export const Input = (props: InputPropsType) => {
-
-
-
+    useEffect(()=> {
+        setStyle({backgroundColor: "white", width: "10em"})
+    },[props.error])
 
     const [style, setStyle] = useState({
         backgroundColor: "white",
@@ -24,6 +24,8 @@ export const Input = (props: InputPropsType) => {
             ? setStyle({backgroundColor: "red", width: "10em"})
             : setStyle({backgroundColor: "white", width: "10em"})
     }, [click])
+
+
 
 
     //сетаем в локальный стейт click противоположное значение для отрабатывания useEffect

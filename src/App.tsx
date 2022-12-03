@@ -42,8 +42,7 @@ function App() {
     }, [])
 
 
-    // Промежуточный стейт настроек(не смог решить по другому, т.к. Кнопка которая сетает значения инпутов
-    // находится в этой компоненте, а инпуты в дочерней)
+    // Промежуточный стейт настроек для отрисовки
     const [preSettings, setPreSettings] = useState<SettingsType>({
         // Первоначальные значения берутся из основного стейта в <App/>
         maxValue: settings.maxValue,
@@ -69,6 +68,7 @@ function App() {
     //Стейт значения счётчика
     const [counterValue, setCounterValue] = useState<number>(settings.startValue)
 
+    // Для изменения отображения
     useEffect(() => {
         setCounterValue(settings.startValue)
     }, [settings])
@@ -105,6 +105,7 @@ function App() {
             startValue: 0,
             incValue: 1,
         })
+        setError(false)
         localStorage.clear()
     }
 
@@ -115,7 +116,7 @@ function App() {
         setPlaceholder(false)
     }
 
-    //error для дисплея
+    //error и placeholder для дисплея
     const [error, setError] = useState(false)
     const [placeholder, setPlaceholder] = useState(false)
 

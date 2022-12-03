@@ -35,18 +35,8 @@ export const CounterWrapper = (props: CounterWrapperPropsType) => {
     const disabledButtonInc = props.settings.maxValue <= props.counterValue
 
 
-    // Проверка на то, что функция в пропсах пришла (костыль, а может и нет=))
-    const changeCounterHandler = () => {
-        props.changeCounter && props.changeCounter()
-    }
 
-    // Проверка на то, что функция в пропсах пришла (костыль, а может и нет=))
-    const resetCounterHandler = () => {
-        props.resetCounter && props.resetCounter()
-    }
-
-
-    //Исходя из типа пришедшего в пропсах, отрисует окно счетчика либо его настроек
+    //Исходя из типа пришедшего в пропсах, отрисует окно счетчика либо окно его настроек
     let counterDisplay;
     if (props.type === 'counter') {
         counterDisplay = <>
@@ -60,8 +50,8 @@ export const CounterWrapper = (props: CounterWrapperPropsType) => {
             </div>
 
             <div className={s.buttonWrapper + ' ' + s.borderStyle + ' ' + s.flexCenter}>
-                <SuperButton title={"inc"} callback={changeCounterHandler} disabled={disabledButtonInc}/>
-                <SuperButton title={"reset"} callback={resetCounterHandler} disabled={disabledButtonReset}/>
+                <SuperButton title={"inc"} callback={props.changeCounter} disabled={disabledButtonInc}/>
+                <SuperButton title={"reset"} callback={props.resetCounter} disabled={disabledButtonReset}/>
             </div>
         </>
     }
