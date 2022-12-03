@@ -12,13 +12,17 @@ export const Input = (props: InputPropsType) => {
 
 
 
-    const [style, setStyle] = useState({backgroundColor: "white"})
+    const [style, setStyle] = useState({
+        backgroundColor: "white",
+        width: "10em"
+
+    })
     const [click, setClick] = useState<boolean>(false)
 
     useEffect(()=> {
         props.error
-            ? setStyle({backgroundColor: "red"})
-            : setStyle({backgroundColor: "white"})
+            ? setStyle({backgroundColor: "red", width: "10em"})
+            : setStyle({backgroundColor: "white", width: "10em"})
     }, [click])
 
 
