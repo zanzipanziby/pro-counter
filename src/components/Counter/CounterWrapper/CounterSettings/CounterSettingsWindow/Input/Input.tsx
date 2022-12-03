@@ -24,13 +24,13 @@ export const Input = (props: InputPropsType) => {
 
     //сетаем в локальный стейт click противоположное значение для отрабатывания useEffect
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.callback(Number(e.currentTarget.value))
+        props.callback(parseInt(e.currentTarget.value))
         setClick(!click)
     }
 
 
     return (
-        <input style={style} value={props.value} type="number" onChange={onChangeHandler}/>
+        <input style={style} value={props.value.toString()} type="number" onChange={onChangeHandler}/>
     );
 };
 

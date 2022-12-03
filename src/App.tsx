@@ -16,6 +16,7 @@ type CounterWindowType = {
     settings: CounterWindowElemType
 }
 
+
 export type SettingsType = {
     incValue: number
     startValue: number
@@ -34,9 +35,9 @@ function App() {
     })
     useEffect(() => {
         setSettings({
-            maxValue: localStorage.getItem('maxValue') ? Number(localStorage.getItem('maxValue')) : settings.maxValue,
-            startValue: localStorage.getItem('maxValue') ? Number(localStorage.getItem('startValue')) : settings.startValue,
-            incValue: localStorage.getItem('incValue') ? Number(localStorage.getItem('incValue')) : settings.incValue,
+            maxValue: localStorage.getItem('maxValue') ? Number(localStorage.getItem('maxValue')) : 5,
+            startValue: localStorage.getItem('maxValue') ? Number(localStorage.getItem('startValue')) : 0,
+            incValue: localStorage.getItem('incValue') ? Number(localStorage.getItem('incValue')) : 1,
         })
     }, [])
 
@@ -77,7 +78,7 @@ function App() {
         setCounterValue(counterValue + settings.incValue)
     }
 
-    // Логика сброса
+    // Логика сброса счётчика
     const resetCounter = () => {
         setCounterValue(settings.startValue)
     }
@@ -92,8 +93,21 @@ function App() {
 
     }
 
+    // Сброс настроек
+    const resetSettings = ()=>{
+        setSettings({
+            maxValue: 5,
+            startValue: 0,
+            incValue: 1,
+        })
+        setPreSettings({
+            maxValue: 5,
+            startValue: 0,
+            incValue: 1,
+        })
+        localStorage.clear()
+    }
 
-    //
 
 
     const changeSettingHandler = () => {
@@ -109,11 +123,11 @@ function App() {
     // из дочерних инпутов, которые находятся в компоненте <CounterSettingsWindow/>
     const changeMaxValue = (maxValue: number) => {
         setPreSettings({...preSettings, maxValue})
-        if (maxValue <= preSettings.startValue || maxValue <= 0) {
+        if (Number.isNaN(maxValue) || maxValue <= 0 || maxValue <= preSettings.startValue) {
+            setError(true)
+        } else {
+            setError(false)
         }
-        maxValue <= preSettings.startValue
-            ? setError(true)
-            : setError(false)
         setPlaceholder(true)
 
     }
@@ -121,21 +135,19 @@ function App() {
 
     const changeStartValue = (startValue: number) => {
         setPreSettings({...preSettings, startValue})
-        if (startValue >= preSettings.maxValue || startValue < 0) {
+        if (Number.isNaN(startValue) || startValue < 0 || startValue >= preSettings.maxValue) {
             setError(true)
         } else {
             setError(false)
         }
-        // (startValue >= preSettings.maxValue)
-        //     ? setError(true)
-        //     : setError(false)
+
         setPlaceholder(true)
     }
 
 
     const changeIncValue = (incValue: number) => {
         setPreSettings({...preSettings, incValue})
-        if ((preSettings.maxValue - preSettings.startValue) / incValue < 1 || incValue <= 0) {
+        if (Number.isNaN(incValue) || incValue <= 0 || (preSettings.maxValue - preSettings.startValue) / incValue < 1) {
             setError(true)
         } else {
             setError(false)
@@ -143,7 +155,7 @@ function App() {
     }
     // --------------------------------------------
 
-    console.log(preSettings)
+
     return (
         <div className="App">
             <div className={"appWrap"}>
@@ -172,6 +184,7 @@ function App() {
                     changeStartValue={changeStartValue}
                     changeIncValue={changeIncValue}
                     changeSettingHandler={changeSettingHandler}
+                    resetSettings={resetSettings}
 
 
                 />
@@ -189,6 +202,7 @@ function App() {
                     changeStartValue={changeStartValue}
                     changeIncValue={changeIncValue}
                     changeSettingHandler={changeSettingHandler}
+                    resetSettings={resetSettings}
 
                 />
             </div>

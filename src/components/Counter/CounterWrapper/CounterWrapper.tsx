@@ -16,10 +16,11 @@ type CounterWrapperPropsType = {
     changeCounter: () => void
     resetCounter: () => void
     changeSettings: (maxValue: number, startValue: number, inc: number) => void
-    changeMaxValue: (maxValue: number)=> void
-    changeStartValue: (startValue: number)=> void
-    changeIncValue: (incValue: number)=> void
+    changeMaxValue: (maxValue: number) => void
+    changeStartValue: (startValue: number) => void
+    changeIncValue: (incValue: number) => void
     changeSettingHandler: () => void
+    resetSettings: () => void
 
     //Приход функций в пропсах решил оставить опциональным для каждого из окон счётчика
 }
@@ -66,25 +67,26 @@ export const CounterWrapper = (props: CounterWrapperPropsType) => {
     }
     if (props.type === 'settings') {
         counterDisplay =
-    <>
-        <div className={s.counterDisplay + ' ' + s.borderStyle + ' ' + s.flexCenter}>
-            <CounterSettingsWindow
-                maxValue={props.preSettings.maxValue}
-                startValue={props.preSettings.startValue}
-                incValue={props.preSettings.incValue}
-                changeMaxValue={props.changeMaxValue}
-                changeStartValue={props.changeStartValue}
-                changeIncValue={props.changeIncValue}
-                error={props.error}
+            <>
+                <div className={s.counterDisplay + ' ' + s.borderStyle + ' ' + s.flexCenter}>
+                    <CounterSettingsWindow
+                        maxValue={props.preSettings.maxValue}
+                        startValue={props.preSettings.startValue}
+                        incValue={props.preSettings.incValue}
+                        changeMaxValue={props.changeMaxValue}
+                        changeStartValue={props.changeStartValue}
+                        changeIncValue={props.changeIncValue}
+                        error={props.error}
 
-            />
-        </div>
+                    />
+                </div>
 
-        <div className={s.buttonWrapper + ' ' + s.borderStyle + ' ' + s.flexCenter}>
-            <SuperButton title={"set"} callback={props.changeSettingHandler} disabled={props.error}/>
-        </div>
-    </>
-}
+                <div className={s.buttonWrapper + ' ' + s.borderStyle + ' ' + s.flexCenter}>
+                    <SuperButton title={"set"} callback={props.changeSettingHandler} disabled={props.error}/>
+                    <SuperButton title={"reset"} callback={props.resetSettings} disabled={false}/>
+                </div>
+            </>
+    }
     // ----------------------------------
 
 
