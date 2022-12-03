@@ -8,22 +8,17 @@ type InputPropsType = {
 }
 
 export const Input = (props: InputPropsType) => {
-    useEffect(()=> {
-        setStyle({backgroundColor: "white", width: "10em"})
-    },[props.error])
 
     const [style, setStyle] = useState({
         backgroundColor: "white",
         width: "10em"
-
     })
-    const [click, setClick] = useState<boolean>(false)
 
     useEffect(()=> {
         props.error
             ? setStyle({backgroundColor: "red", width: "10em"})
             : setStyle({backgroundColor: "white", width: "10em"})
-    }, [click])
+    }, [props.error])
 
 
 
@@ -31,7 +26,6 @@ export const Input = (props: InputPropsType) => {
     //сетаем в локальный стейт click противоположное значение для отрабатывания useEffect
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         props.callback(parseInt(e.currentTarget.value))
-        setClick(!click)
     }
 
 
