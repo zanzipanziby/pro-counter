@@ -32,7 +32,7 @@ export const CounterWrapper = (props: CounterWrapperPropsType) => {
 
     //Логика дизейблов кнопок счётчика(отправлены в пропсах для каждой кнопки, т.к. )
     const disabledButtonReset = props.counterValue === props.settings.startValue
-    const disabledButtonInc = props.settings.maxValue <= props.counterValue
+    const disabledButtonInc = props.error || props.settings.maxValue <= props.counterValue
 
 
 
