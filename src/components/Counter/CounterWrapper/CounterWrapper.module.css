@@ -1,0 +1,23 @@
+.counterWrapper {
+
+
+}
+
+.counterDisplay {
+
+}
+
+.buttonWrapper {
+
+}
+
+.borderStyle {
+    border: 3px solid #73caec;
+    border-radius: 10px;
+}
+
+.flexCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
